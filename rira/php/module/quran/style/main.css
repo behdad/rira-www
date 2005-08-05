@@ -1,0 +1,8 @@
+body {
+  background-image: url(background.png);
+  font-family: "Arabic Typesetting", Roya, Nazli, "Arabic Transparent", "Courier New", "Lucida Sans Unicode", Arial, Tahoma, sans-serif;
+}
+
+div.contents {
+  font-size: larger;
+}

@@ -1,0 +1,112 @@
+/* ****************** Style for page body *************** */
+
+body {
+  color: #eef;
+  background: #222 left top no-repeat;
+}
+
+body, input {
+  font-family: Roya, Nazli, Nesf2, Tahoma, Arial, sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: Titr, Nazli, Nesf2, Tahoma, serif;
+  text-align: center;
+}
+
+a {
+  color: #ff8;
+  text-decoration: none;
+}
+
+a.nohighlight {
+  cursor: default;
+  color: inherit;
+}
+
+a.nohighlight:hover {
+  background-color: #333;
+}
+
+a.nohighlight:focus {
+  outline: none;
+}
+
+.button, input {
+  border: solid 1px gray;
+}
+
+.button, .button a, .button a:hover, input[type=submit], input[type=reset] {
+  background-color: #ccc;
+  color: black;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+td {
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+form>p {
+  margin: 0;
+  text-indent: 0;
+}
+
+.main {
+  margin: 0ex 1em;
+  text-align: right;
+}
+
+ul.contents {
+  list-style-type: none;
+}
+
+/* Navigation panel */
+
+div.navpanel {
+  width: 30%;
+  margin-right: 2.5em; 
+  font-size: smaller;
+}
+
+.navpanel>table {
+  width: 100%;
+}
+
+.navpanel>table>tbody>tr>td {
+  width: 33%;
+}
+
+.navpanel hr {
+  width: 100%;
+  height: 1px;
+  color: gray;
+  background-color: gray;
+  border: 0;
+}
+
+/* Search results */
+
+.found {
+  color: #F88;
+}
+
+.notfound {
+  color: #88F;
+}
