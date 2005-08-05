@@ -3,6 +3,7 @@
 define('BASE', dirname(__FILE__).'/../');
 
 include_once BASE."script/config.php";
+include_once BASE."script/init.php";
 include_once BASE."script/tools.php";
 include_once BASE."script/persian.php";
 include_once BASE."script/link.php";

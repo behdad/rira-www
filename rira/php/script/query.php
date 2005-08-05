@@ -42,11 +42,4 @@ if (isset($ord)) {
   $ord = $ord < 0 ? 0 : $ord;
 }
 
-if (!isset($cfg['locale']))
-  $cfg['locale'] = str_replace('-', '_', $cfg['lang']);
-
-ini_set ('display_errors', $cfg['php_debug'] ? 1 : 0);
-
-setlocale(LC_ALL, $cfg['locale']);
-
 ?>

@@ -21,8 +21,8 @@ class __rira_sqldb_home extends __rira_sqldb_obj {
     return parent::get_contents_iterator($query);
   }
 
-  function &get_header_data () {
-    return __rira_obj::get_header_data();
+  function &get_header_data ($q='') {
+    return __rira_obj::get_header_data($q);
   }
 
 }

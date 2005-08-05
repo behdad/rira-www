@@ -29,7 +29,7 @@ class __rira_obj {
 
   function &create_parent () {
     if (empty($this->parent) || isset($this->p))
-      return isset($this->p) ? $this->p : false;
+      return isset($this->p) ? $this->p : NULL;
     if (!($this->p = &new_rira_obj($this->parent, $this->module)))
       return false;
     if (isset($this->header))
@@ -42,7 +42,7 @@ class __rira_obj {
 
   function &create_child () {
     if (empty($this->child) || isset($this->c))
-      return isset($this->c) ? $this->c : false;
+      return isset($this->c) ? $this->c : NULL;
     if (!($this->c = &new_rira_obj($this->child, $this->module)))
       return false;
     if (isset($this->content))

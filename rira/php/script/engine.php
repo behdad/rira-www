@@ -32,7 +32,7 @@ function get_page() {
 
     ob_start();
     $o = new_rira_obj($obj);
-    if (!$o) {
+    if (!$o || !(false === array_search ($page, $o->deny_page))) {
       $o = new_rira_obj();
       $o->me = $obj;
     }

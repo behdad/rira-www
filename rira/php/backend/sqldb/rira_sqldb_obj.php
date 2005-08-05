@@ -5,10 +5,8 @@ include_once BASE.'backend/sqldb/sqldb.php';
 class __rira_sqldb_obj extends __rira_obj {
 
   function __rira_sqldb_obj () {
-    global $sqldb;
+    $this->db = &sqldb_backend_factory::get_sqldb();
     parent::__rira_obj();
-    $this->use_schema = @$sqldb->set_schema($this->module);
-    $this->db = &$sqldb->db;
   }
 
   function get_table ($table = '', $obj = false, $mod = false) {
@@ -17,7 +15,7 @@ class __rira_sqldb_obj extends __rira_obj {
     if (!$obj)
       $obj = $this->me;
     $table = $table[0] == '_' || $table == '' ? $obj.$table : $table;
-    return $this->use_schema ? "${mod}.${table}" : "${mod}__${table}";
+    return $this->db->has_schema ? "${mod}.${table}" : "${mod}__${table}";
   }
 
   function get_id_by_ord ($ord, $p_id = 0) {
@@ -31,10 +29,10 @@ class __rira_sqldb_obj extends __rira_obj {
         $query .= " and $this->parent"."_id=".sqlspecialchars($p_id);
     }
     $query .= " limit 1";
-    $res = $this->db->query($query);
-    if (DB::isError($res) || $this->db->numRows($res) < 1)
+    $res = &$this->db->query($query);
+    if (DB::isError($res) || $res->numRows() < 1)
       return false;
-    $row = $res->fetchRow();
+    $row = &$res->fetchRow();
     $this->db->freeResult($res);
     return $row["${me}_id"];
   }
@@ -50,14 +48,14 @@ class __rira_sqldb_obj extends __rira_obj {
       if (!empty($p_id))
         $moreq .= " where $this->parent"."_id=".sqlspecialchars($p_id);
     }
-    $res = $this->db->query("$query $moreq");
+    $res = &$this->db->query("$query $moreq");
     if (DB::isError($res)) {
       $query = "select count(1) as count from ".$this->get_table('_header');
-      $res = $this->db->query("$query $moreq");
+      $res = &$this->db->query("$query $moreq");
     }
     if (DB::isError($res))
       return 0;
-    $row = $res->fetchRow();
+    $row = &$res->fetchRow();
     $this->db->freeResult($res);
     return $row['count'];
   }
@@ -74,20 +72,26 @@ class __rira_sqldb_obj extends __rira_obj {
     } else
       $query = $q;
     $moreq = "limit 1";
-    $res = $this->db->query("$query $moreq");
+    $res = &$this->db->query("$query $moreq");
     if (DB::isError($res)) {
       if (empty($q)) {
         $query = "select * from ".$this->get_table('', $obj);
         if ($id)
 	  $query .= " where ${obj}_id=".sqlspecialchars($id);
-        $res = $this->db->query("$query $moreq");
+        $res = &$this->db->query("$query $moreq");
       }
       if (DB::isError($res))
         return $this->header = array();
     }
-    if ($this->db->numRows($res) < 1)
+    if ($res->numRows() < 1)
+    {
+      if ($this->db->debug) {
+        global $log;
+        $log .= "Expected non-empty result set.<br>\n";
+      }
       error("notfound1");
-    $row = $res->fetchRow();
+    }
+    $row = &$res->fetchRow();
     $this->db->freeResult($res);
     $this->set_header($row);
 
@@ -120,13 +124,18 @@ class __rira_sqldb_obj extends __rira_obj {
     } else
       $query = $q;
     $moreq = " limit ".($limit+1)." offset ".(($pageno-1)*$limit);
-    $res = $this->db->query("$query $moreq");
+    $res = &$this->db->query("$query $moreq");
     if (DB::isError($res)) {
       $this->num_rows = -1;
       return $this->iterator = null;
     }
-    if ($res->numRows() < 1)
+    if ($res->numRows() < 1) {
+      if ($this->db->debug) {
+        global $log;
+        $log .= "Expected non-empty result set.<br>\n";
+      }
       error("notfound2");
+    }
     $rows = $res->numRows();
 
     // prev and next pages exist?

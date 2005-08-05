@@ -4,58 +4,72 @@ include_once "DB.php";
 
 class sqldb_backend {
 
-  var $db = null;
+  var $has_schema;
 
-  function sqldb_backend () {
+  function sqldb_backend ($silent = false) {
     global $cfg;
 
-    $this->db = &DB::connect($cfg['dsn'], array('debug'=>$cfg['db_debug'], 'persistent'=>$cfg['db_persistent']));
+    $this->debug = $cfg['db_debug'];
+    $this->db = &DB::connect($cfg['dsn'], array('debug'=>$this->debug, 'persistent'=>$cfg['db_persistent']));
     if (DB::isError($this->db)) {
-	die ($this->db->getMessage());
+      if ($silent)
+	return;
+      else
+        die (DB::errorMessage($this->db->getCode()));
     }
     $this->db->setFetchMode(DB_FETCHMODE_ASSOC);
     $this->db->autoCommit(false);
-    @$this->db->freeResult($this->db->query("set client_encoding to 'UNICODE'"));
+    $this->has_schema = !DB::isError($this->query("set search_path to public"));
+    $this->query("set client_encoding to 'UNICODE'");
     // Try to set locale on server, needs pgbe extension installed.
-    @$this->db->freeResult($this->db->query("select locale ('LC_COLLATE', ".$cfg['locale'].")"));
+    @$this->freeResult($this->query("select locale ('LC_COLLATE', ".sqlspecialchars($cfg['locale']).")"));
   }
 
-  function set_schema ($s) {
-    $res = $this->db->query("set search_path to $s");
-    $ret = !DB::isError($res);
-    @$this->db->freeResult($res);
-    return $ret;
-  }
+  function query($q) {
+    $res = &$this->db->query ($q);
 
-  function mes($res) {
-    global $cfg;
-    if (DB::isError($res)) {
-      if ($cfg['db_debug'] && isset($this->db)) {
-	echo "<strong>" . $this->db->errorNative() . "</strong><br/>\n";
+    if ($this->debug) {
+      $s = $q;
+      if (DB::isError($res)) {
+        $s = '<code style="color: red;">'.$s."; --</code>";
+        $s .= ' '.DB::errorMessage($res->getCode());
+        if (isset($this->db->errorNative))
+	  $s .= "<blockquote>-- ".$this->db->errorNative()."</blockquote>\n";
+	else
+	  $s .= "<br>";
+	$s .= "\n";
+        $this->rollback ();
+      } else {
+        $s = '<code style="color: green;">'.$s.'; --</code>';
+	$s .= ' <span style="color: blue;">'.($this->db->numRows($res))."</span>";
+	$s .= "<br>\n";
       }
-      rollbackDB();
-      return 'dberror'.$res->getCode()." ";
+      global $log;
+      $log .= $s;
     }
-    return false;
+
+    return $res;
   }
 
-  function diedb($res) {
-    if (DB::isError($res)) {
-      error($this->mes($res));
-    }
-    return false;
+  function freeResult($res) {
+    return $this->db->freeResult ($res);
   }
 
-  function rollbackdb() {
-    if (isset($this->db)) {
-      $rb = $this->db->rollback();
-      if (DB::isError($rb)) {
-	  echo ($rb->getMessage($rb->getCode()));
-      }
-    }
+  function rollback() {
+    return $this->db->rollback();
   }
 }
 
-$sqldb = new sqldb_backend();
+class sqldb_backend_factory {
+  function get_sqldb () {
+    static $sqldb = NULL;
+    if (!$sqldb) {
+      $sqldb = new sqldb_backend(true);
+      if (DB::isError($sqldb->db))
+        $sqldb = NULL;
+    }
+    return $sqldb;
+  }
+}
 
 ?>
