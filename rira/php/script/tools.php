@@ -1,5 +1,7 @@
 <?php
 
+$log = '';
+
 function substr_utf8 ($str, $start, $length = '') {
   $utf8char = '(?:[\x00-\x7F]|[\xC0-\xFF][\x80-\xBF]*)';
   $pat = "/^$utf8char{0,$start}($utf8char{0,$length})/";
@@ -12,6 +14,9 @@ function myempty($x) {
 }
 
 function error($s) {
+  global $log, $cfg;
+  if ($cfg['debug'])
+    echo $log;
   die($s);
 }
 

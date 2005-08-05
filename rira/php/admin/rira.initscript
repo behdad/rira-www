@@ -1,0 +1,30 @@
+#!/bin/bash
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+
+[ "$UID" '!=' 0 ] && exec sudo $0 "$@"
+
+case $1 in
+
+	start)
+		service identd start
+		service postgresql start
+		service httpd start
+	;;
+
+	stop)
+		service httpd stop
+		service postgresql stop
+		service identd stop
+	;;
+
+	reload)
+		service identd reload
+		service postgresql reload
+		service httpd reload
+	;;
+
+	restart)
+		$0 stop
+		$0 start
+	;;
+esac

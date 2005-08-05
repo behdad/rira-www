@@ -1,2 +1,6 @@
 Options -Indexes
 DirectoryIndex index.php
+<Files CVS>
+    Order allow,deny
+    Deny from all
+</Files>

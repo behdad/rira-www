@@ -13,6 +13,23 @@ $cfg['locale'] = 'fa_IR';
 $cfg['dir'] = 'rtl';
 
 /* Sql backend */
+/* 
+ * Note: The following setting works if:
+ *   - Postgres user 'apache' exists.
+ *   - Postgres database 'rira' exists.
+ *   - Postgres database 'rira' is readable by Postgres user 'apache'.
+ *   - Your web server runs PHP scripts as user 'apache'.
+ *   - Your Postgres configuration allows connections from localhost
+ *     by 'identd sameuser' setting.
+ *   - You have identd service running.
+ *
+ * The Postgres settings are the default on Fedora systems, but
+ * you still need to make sure identd is installed and running.
+ * Alternatively, you may set a password for Postgres user 'apache'
+ * and instruct Postgres to authenticate by password, and pass the
+ * password here.
+ *
+ */
 // format: 'backend://username[:password]@host/dbname'
 $cfg['dsn'] = 'pgsql://apache@localhost/rira';
 $cfg['db_persistent'] = true;
