@@ -65,8 +65,10 @@ class sqldb_backend_factory {
     static $sqldb = NULL;
     if (!$sqldb) {
       $sqldb = new sqldb_backend(true);
-      if (DB::isError($sqldb->db))
+      if (DB::isError($sqldb->db)) {
+        echo DB::errorMessage($sqldb->db->getCode());
         $sqldb = NULL;
+      }
     }
     return $sqldb;
   }

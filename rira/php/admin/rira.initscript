@@ -27,4 +27,8 @@ case $1 in
 		$0 stop
 		$0 start
 	;;
+
+	*)
+		echo "'s up, buddy?"
+	;;
 esac

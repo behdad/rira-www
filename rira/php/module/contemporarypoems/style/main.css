@@ -2,3 +2,7 @@ body {
   background-image: url(background.png);
   background-color: #402;
 }
+
+a.nohighlight:hover {
+  background-color: #603;
+}

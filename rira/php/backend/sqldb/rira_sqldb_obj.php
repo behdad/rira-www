@@ -15,7 +15,7 @@ class __rira_sqldb_obj extends __rira_obj {
     if (!$obj)
       $obj = $this->me;
     $table = $table[0] == '_' || $table == '' ? $obj.$table : $table;
-    return $this->db->has_schema ? "${mod}.${table}" : "${mod}__${table}";
+    return $this->db->has_schema ? $mod.".".$table : $mod."__".$table;
   }
 
   function get_id_by_ord ($ord, $p_id = 0) {

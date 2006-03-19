@@ -1,7 +1,11 @@
 body {
   background-image: url(background.png);
   background-color: #031;
-  font-family: "Arabic Typesetting", Roya, Nazli, "Arabic Transparent", "Courier New", "Lucida Sans Unicode", Arial, Tahoma, sans-serif;
+  font-family: "Arabic Typesetting", "Arabic Transparent", "Courier New", Roya, Nazli, "Lucida Sans Unicode", Arial, Tahoma, sans-serif;
+}
+
+a.nohighlight:hover {
+  background-color: #004818;
 }
 
 div.contents {
