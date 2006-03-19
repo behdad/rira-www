@@ -57,4 +57,8 @@ $cfg['next'] = '';
 //$cfg['separator'] = ' : '; // MacOS X style ;-)
 //$cfg['prev'] = '< ';
 //$cfg['next'] = ' >';
+
+$custom_cfg = dirname (__FILE__) .'/custom.php';
+if (file_exists ($custom_cfg))
+  include_once $custom_cfg;
 ?>
