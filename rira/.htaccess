@@ -1,0 +1,6 @@
+DirectoryIndex index.php index.html
+Options +FollowSymLinks -Indexes
+<Files CVS>
+    Order allow,deny
+    Deny from all
+</Files>
