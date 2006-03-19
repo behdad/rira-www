@@ -14,7 +14,7 @@ class __rira_sqldb_obj extends __rira_obj {
       $mod = $this->module;
     if (!$obj)
       $obj = $this->me;
-    $table = $table[0] == '_' || $table == '' ? $obj.$table : $table;
+    $table = ($table == '' || $table[0] == '_') ? $obj.$table : $table;
     return $this->db->has_schema ? $mod.".".$table : $mod."__".$table;
   }
 
