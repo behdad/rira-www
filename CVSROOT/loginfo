@@ -29,3 +29,5 @@
 CVSROOT /cvsroot/sitedocs/CVSROOT/cvstools/syncmail %{sVv} behdad@users.sourceforge.net
 
 DEFAULT /cvsroot/sitedocs/CVSROOT/cvstools/syncmail %{sVv} rira-commit@lists.sourceforge.net
+
+ALL $CVSROOT/CVSROOT/checkitout /home/groups/r/ri/rira/htdocs %{sVv} %p
