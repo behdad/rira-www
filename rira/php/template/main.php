@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Script-Type" content="text/javascript"/>
   <meta http-equiv="Content-Language" content="<?php echo $cfg['lang']; ?>"/>
   <meta xml:lang="en" name="author" content="Behdad Esfahbod"/>
-  <meta xml:lang="en" name="copyright" content="2003--2005  Behdad Esfahbod"/>
+  <meta xml:lang="en" name="copyright" content="2003--2006  Behdad Esfahbod"/>
   <meta name="webmaster" content="http://behdad.org/"/>
   <meta xml:lang="en" name="description"
    content="RiRa is a Persian Digital Library.  Currently it contains the Quran and
