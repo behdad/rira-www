@@ -1,10 +1,6 @@
 DirectoryIndex index.php index.html
 Options +FollowSymLinks -Indexes
-<Files CVS>
-    Order allow,deny
+<FilesMatch "Entries|Repository|Root">
+    Order Deny,Allow
     Deny from all
-</Files>
-<Files CVSROOT>
-    Order allow,deny
-    Deny from all
-</Files>
+</FilesMatch>
