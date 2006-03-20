@@ -20,9 +20,16 @@ class sqldb_backend {
     $this->db->setFetchMode(DB_FETCHMODE_ASSOC);
     $this->db->autoCommit(false);
     $this->has_schema = !DB::isError($this->query("set search_path to public"));
+
+    // postgresql: client encoding
     $this->query("set client_encoding to 'UNICODE'");
-    // Try to set locale on server, needs pgbe extension installed.
+    // mysql 4: client encoding
+    $this->query("set character set 'utf8'");
+
+    // postgresql: Try to set locale on server, needs pgbe extension installed.
     @$this->freeResult($this->query("select locale ('LC_COLLATE', ".sqlspecialchars($cfg['locale']).")"));
+
+
   }
 
   function query($q) {
@@ -57,6 +64,10 @@ class sqldb_backend {
 
   function rollback() {
     return $this->db->rollback();
+  }
+
+  function commit() {
+    return $this->db->commit();
   }
 }
 

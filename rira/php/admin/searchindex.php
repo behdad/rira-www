@@ -41,8 +41,6 @@
   while ($module = $res->fetchRow()) {
     $mod = $module['module_id']; 
     $modbase = BASE."module/$mod/";
-    if (!$sqldb->set_schema($mod))
-      continue;
     echo "module $mod\n";
     $obj = 'home';
     include_once "$modbase$obj.php";
