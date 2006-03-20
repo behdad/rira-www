@@ -4,3 +4,7 @@ Options +FollowSymLinks -Indexes
     Order allow,deny
     Deny from all
 </Files>
+<Files CVSROOT>
+    Order allow,deny
+    Deny from all
+</Files>
