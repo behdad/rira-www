@@ -1,5 +1,12 @@
 <?php
 
+/* See if we should use locally copied DB */
+$local_DB = dirname (__FILE__).'/DB.php';
+if (file_exists ($local_DB)) {
+  /* add local dir to include path, needed for includes inside DB to work. */
+  $path = '/usr/lib/pear';
+  set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__));
+}
 include_once "DB.php";
 
 class sqldb_backend {
