@@ -26,7 +26,9 @@
 	- move include_once's down the code, when needed.
 	- rework random to pass id instead of rid. faal is broken, shows multiple poems!
 	- hightlight item if $ord is set.  introduce $hilite, with vals 0, 1, 2?
-	- add search box for poems too.
+	- add search box for poems too.  this doesn't work right now because
+	  we cannot pass ord of verse in search results, as we are going
+	  through blocks.
 	- allow "faal" everywhere.
 	- finish view the whole book thing.
 	- increase limit.

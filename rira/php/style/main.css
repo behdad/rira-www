@@ -104,9 +104,9 @@ div.navpanel {
 /* Search results */
 
 .found {
-  color: #F88;
+  color: #F33;
 }
 
 .notfound {
-  color: #88F;
+  color: #33F;
 }

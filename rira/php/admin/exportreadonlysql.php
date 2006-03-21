@@ -9,8 +9,8 @@
     error('accessdenied');
 
   preg_match("|.*//([^:@]*):?([^@]*)@([^/]*)/(.*)|", $cfg['dsn'], $p);
-  $db_name = $p[4];
-  $host_db = $p[3];
+  $dbname = $p[4];
+  $hostname = $p[3];
   $username = $p[1];
   $password = $p[2];
 
@@ -81,7 +81,7 @@ function dump_table ($to, $from) {
   sleep (2);
   echo "Dumping...\n";
 
-  `pg_dump --inserts --clean --no-privileges --no-owner --schema dump --host "$host_db" --username "$username" $db_name | grep -v '^SET' | grep -v 'SCHEMA' | sed 's/dump[.]//g' | bzip2 --best > rira-web.mysql.bz2`;
+  `pg_dump --inserts --clean --no-privileges --no-owner --schema dump --host "$hostname" --username "$username" $dbname | grep -v '^SET' | grep -v 'SCHEMA' | sed 's/dump[.]//g' | bzip2 --best > rira-web.mysql.bz2`;
 
   $query = "drop schema dump cascade";
   $res = $sqldb->query($query);

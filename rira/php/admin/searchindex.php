@@ -1,15 +1,17 @@
 #!/usr/bin/php -f
 <?php
-  include_once "../script/config.php";
+  $base = dirname (__FILE__)."/..";
+  include_once "$base/script/config.php";
   $cfg['db_debug'] = false;
-  include_once "../script/include.php";
-  include_once "../backend/sqldb/sqldb.php";
+  include_once "$base/script/include.php";
+  include_once "$base/backend/sqldb/sqldb.php";
 
   if (!empty($SERVER_ADDR))
     error('accessdenied');
 
-  preg_match("|.*//([^:@]*):?([^@]*)@(.*)|", $cfg['dsn'], $p);
-  $host_db = $p[3];
+  preg_match("|.*//([^:@]*):?([^@]*)@([^/]*)/(.*)|", $cfg['dsn'], $p);
+  $dbname = $p[4];
+  $hostname = $p[3];
   $username = $p[1];
   $password = $p[2];
 
@@ -20,7 +22,8 @@
 
     # if password is not set, assume ident authentication
     if ($password === '') {
-      echo "password is empty.  you may want to run this script as user $username.\n";
+      echo "password is empty.\n".
+           "you may want to run this script as user $username.\n";
     }
   }
   if (!$sqldb) {
@@ -28,7 +31,8 @@
     exit;
   }
 
-  echo $host_db."\n";
+  echo $hostname."\n";
+  echo $dbname."\n";
   echo $username."\n";
   echo $password."\n";
 

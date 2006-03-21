@@ -77,7 +77,7 @@ class sqldb_backend_factory {
     if (!$sqldb) {
       $sqldb = new sqldb_backend(true);
       if (DB::isError($sqldb->db)) {
-        echo DB::errorMessage($sqldb->db->getCode());
+        echo DB::errorMessage($sqldb->db->getCode())."\n";
         $sqldb = NULL;
       }
     }

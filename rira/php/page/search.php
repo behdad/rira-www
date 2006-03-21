@@ -26,7 +26,7 @@
     $idnq = $o->get_idn_query();
     $start = (($pageno-1)*$lim);
     $cmd = "echo ".escapeshellarg(($lim+1)."\n$start\n$idnq\n$new_q")
-         . " | ".BASE."../lib/search/search";
+         . " | ".BASE."../config search";
     $res = explode("\n", `$cmd`);
     $clean_q = $res[0];
 
@@ -61,7 +61,7 @@
         $id = $fields[2];
         $obj = $fields[3];
 
-	$f = new_rira_obj ($obj);
+	$f = new_rira_obj ($obj, $newmod);
 	
         $row_text = "<strong>".$f->get_header_string(2, 0, array('valid_id'=>true, 'all_q'=>$q, 'mod'=>$newmod))."</strong>";
 	if (!empty($text)) {
