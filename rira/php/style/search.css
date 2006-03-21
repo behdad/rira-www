@@ -3,12 +3,10 @@
 }
 
 blockquote.snippet {
-  margin-top: .8ex;
-  margin-bottom: 1.2ex;
+  margin-top: 1ex;
+  margin-bottom: 2ex;
   margin-left: 0em;
-  margin-right: 0em;
+  margin-right: 1em;
   color: #ACA;
-  background-color: #114;
-  padding: .2em 2em;
-  border: solid #225 1px;
+  padding: 0 1em;
 }
