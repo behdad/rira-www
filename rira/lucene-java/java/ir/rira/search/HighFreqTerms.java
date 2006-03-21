@@ -67,6 +67,11 @@ class HighFreqTerms {
   public static void main(String[] args) throws Exception {
     OutputStreamWriter out = new OutputStreamWriter(System.out, "UTF-8");
 
+    if (args.length < 1) {
+      out.write("Please pass the lucene index as first argument.\n");
+      out.flush();
+      return;
+    }
     IndexReader reader = IndexReader.open(args[0]);
 
     TermInfoQueue tiq = new TermInfoQueue(numTerms);
