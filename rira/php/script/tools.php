@@ -37,15 +37,15 @@ function short_title($s, $len_factor = -1) {
   return $sub;
 }
 
-function site_js ($s) {
-  $rel = "script/js/$s.js";
+function site_js ($s, $where = 'js') {
+  $rel = "$where/$s.js";
   if (file_exists(BASE.$rel))
     return "  <script type=\"text/javascript\" src=\"$rel\" defer=\"defer\"></script>\n";
   return '';
 }
 
-function site_css ($s) {
-  $rel = "style/$s.css";
+function site_css ($s, $where = 'style') {
+  $rel = "$where/$s.css";
   if (file_exists(BASE.$rel))
     return "  <link rel=\"stylesheet\" href=\"$rel\"/>\n";
   return '';
