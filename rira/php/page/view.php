@@ -3,6 +3,7 @@
   if ($o->random && isset($rid)) {
     $id = $o->get_random_id($rid);
     unset($rid);
+    unset($o->header);
   }
   
   $header_title = $o->get_header_string(1);
