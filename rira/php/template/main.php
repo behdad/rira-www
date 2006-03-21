@@ -35,9 +35,10 @@
     unset($body);
     echo "</div>\n";
     
-    include 'navpanel.php';
   }
+  include 'navpanel.php';
   
+  include_custom ("footer.php");
 ?>
 </div>
 </body>
