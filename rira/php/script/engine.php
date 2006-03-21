@@ -42,8 +42,8 @@ function get_page() {
     if (!empty($noaccess))
       error('accessdenied');
   } while (cascade() && $round < $cfg['max_redirect']);
-  site_css ('main', custom);
-  site_js ('main', custom);
+  $header .= site_css ('main', custom);
+  $header .= site_js ('main', custom);
 }
 
 function cascade () {
