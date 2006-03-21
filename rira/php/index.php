@@ -1,5 +1,5 @@
 <?php
-  include_once "script/include.php";
+  require_once "script/include.php";
 
   get_page();
 
