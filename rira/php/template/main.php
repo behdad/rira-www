@@ -38,7 +38,7 @@
   }
   include 'navpanel.php';
   
-  include_custom ("footer.php");
+  @include 'custom/footer.php';
 ?>
 </div>
 </body>
