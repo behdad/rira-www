@@ -7,4 +7,4 @@ INDEX="$base/index"
 test -f "$base/config" && . "$base/config"
 
 
-$base/classpath $JAVA org.rira.search.SearchObjects "$INDEX"
+$base/classpath $JAVA ir.rira.search.SearchObjects "$INDEX"

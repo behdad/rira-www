@@ -1,4 +1,4 @@
-package org.rira.search;
+package ir.rira.search;
 
 /* ====================================================================
  * The Apache Software License, Version 1.1
@@ -54,63 +54,77 @@ package org.rira.search;
  * <http://www.apache.org/>.
  */
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-import org.apache.lucene.util.PriorityQueue;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.Term;
-import org.apache.lucene.index.TermEnum;
+import org.apache.lucene.analysis.Analyzer;
+import com.cybermehr.lucene.analysis.persian.PersianAnalyzer;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.search.Searcher;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.Hits;
+import com.cybermehr.lucene.queryParser.QueryParser;
 
-class HighFreqTerms {
-  public static int numTerms = 100;
-
+class SearchObjects {
   public static void main(String[] args) throws Exception {
-    OutputStreamWriter out = new OutputStreamWriter(System.out, "UTF-8");
+      Searcher searcher = new IndexSearcher(args[0]);
+      Analyzer analyzer = new PersianAnalyzer();
 
-    IndexReader reader = IndexReader.open(args[0]);
+      BufferedReader in = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
+      OutputStreamWriter out = new OutputStreamWriter(System.out, "UTF-8");
+      
+      String l1, l2, l3, l4;
+      int i = 0;
+      while ((l1 = in.readLine()) != null && (l2 = in.readLine()) != null
+          && (l3 = in.readLine()) != null && (l4 = in.readLine()) != null) {
+	int limit = Integer.parseInt(l1);
+	int start = Integer.parseInt(l2);
 
-    TermInfoQueue tiq = new TermInfoQueue(numTerms);
-    TermEnum terms = reader.terms();
+	Query q = null;
+	Query textquery = null;
+	Query idnquery = null;
 
-    int minFreq = 0;
-    while (terms.next()) {
-      if (terms.docFreq() > minFreq) {
-        tiq.put(new TermInfo(terms.term(), terms.docFreq()));
-        if (tiq.size() > numTerms) {		  // if tiq overfull
-          tiq.pop();				  // remove lowest in tiq
-          minFreq = ((TermInfo)tiq.top()).docFreq; // reset minFreq
-        }
+	if (!l3.equals("")) {
+	  idnquery = QueryParser.parse(l3, "idn", analyzer);
+	  q = textquery;
+	}
+	if (!l4.equals("")) {
+	  textquery = QueryParser.parse(l4, "contents", analyzer);
+	  q = textquery;
+	}
+	if (idnquery != null && textquery != null) {
+	  BooleanQuery bQuery = new BooleanQuery();
+	  bQuery.add(idnquery, true, false); // REQUIRED
+	  bQuery.add(textquery, true, false); // REQUIRED
+	  q = bQuery;
+	}
+
+	if (textquery != null)
+	  out.write(textquery.toString("contents") + "\n");
+	else
+	  out.write("\n");
+
+	Hits hits = searcher.search(q);
+	out.write(hits.length() + "\n");
+
+	int end = Math.min(hits.length(), start + limit);
+	out.write(Math.max(0, (end - start)) + "\n");
+	
+	for (int c = start; c < end; c++) {
+	  Document doc = hits.doc(c);
+	  String idn = doc.get("idn");
+	  String text = doc.get("contents");
+          out.write(idn + "\n" + text + "\n");
+	}
+	out.flush();
+
+	if (++i % 10000 == 0)
+	  System.gc();
       }
-    }
-
-    while (tiq.size() != 0) {
-      TermInfo termInfo = (TermInfo)tiq.pop();
-      out.write(termInfo.term + " " + termInfo.docFreq + "\n");
-    }
-    out.flush();
-
-    reader.close();
+      searcher.close();
 
   }
 }
-
-final class TermInfo {
-  TermInfo(Term t, int df) {
-    term = t;
-    docFreq = df;
-  }
-  int docFreq;
-  Term term;
-}
-
-final class TermInfoQueue extends PriorityQueue {
-  TermInfoQueue(int size) {
-    initialize(size);
-  }
-  protected final boolean lessThan(Object a, Object b) {
-    TermInfo termInfoA = (TermInfo)a;
-    TermInfo termInfoB = (TermInfo)b;
-    return termInfoA.docFreq < termInfoB.docFreq;
-  }
-}
-

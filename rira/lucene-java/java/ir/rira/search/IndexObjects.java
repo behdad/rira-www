@@ -1,4 +1,4 @@
-package org.rira.search;
+package ir.rira.search;
 
 /* ====================================================================
  * The Apache Software License, Version 1.1

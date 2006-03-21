@@ -1,11 +1,19 @@
-#/bin/sh
+#!/bin/sh
 
-cd "`dirname "$0"`"
-rm -rf indexnew
 
-../config searchindex |
-./classpath java org.rira.search.IndexObjects indexnew > log &&
-chmod a+w indexnew &&
-( test -f index && mv index indexold || : ) &&
-mv indexnew index &&
-rm -rf indexold
+
+base=`dirname "$0"`
+JAVA=java
+INDEX="$base/index"
+
+test -f "$base/config" && . "$base/config"
+
+
+rm -rf "${INDEX}new"
+
+$base/../config searchindex |
+$base/classpath $JAVA ir.rira.search.IndexObjects "${INDEX}new" > "${INDEX}log" &&
+chmod a+w "${INDEX}new" &&
+( test -f "${INDEX}" && mv "${INDEX}" "${INDEX}old" || : ) &&
+mv "${INDEX}new" "${INDEX}" &&
+rm -rf "${INDEX}old"
