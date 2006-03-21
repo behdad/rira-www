@@ -62,4 +62,5 @@ $cfg['next'] = '';
 //$cfg['prev'] = '< ';
 //$cfg['next'] = ' >';
 
+include_custom ("config.php");
 ?>
