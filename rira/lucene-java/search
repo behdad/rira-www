@@ -1,0 +1,5 @@
+#!/bin/bash
+
+base=`dirname "$0"`
+
+$base/classpath java org.rira.search.SearchObjects $base/index

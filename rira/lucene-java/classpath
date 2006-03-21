@@ -1,0 +1,7 @@
+#!/bin/bash
+
+base=`dirname "$0"`
+CLASSPATH="$base/java:`echo $base/jar/*.jar | tr ' ' :`"
+export CLASSPATH
+
+exec "$@"

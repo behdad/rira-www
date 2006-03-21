@@ -1,0 +1,11 @@
+#/bin/bash
+
+cd "`dirname "$0"`"
+rm -rf indexnew
+
+../config searchindex |
+./classpath java org.rira.search.IndexObjects indexnew > log &&
+chmod a+w indexnew &&
+( test -f index && mv index indexold || : ) &&
+mv indexnew index &&
+rm -rf indexold
