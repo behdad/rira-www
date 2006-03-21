@@ -1,1 +1,3 @@
-<?php header("Location: http://rira.ir/rira/php"); exit; ?>
+<?php
+  header("Location: http://rira.ir/rira/php?"._SERVER["QUERY_STRING"]);
+?>
