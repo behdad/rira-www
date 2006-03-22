@@ -13,6 +13,10 @@
   
   $iterator = $o->get_contents_iterator();
   
+  if (isset($o->audio_url)) {
+    $header_title .= ' '.make_audio_button('صدا', $o->audio_url);
+  }
+
   if (isset($o->c) && $o->c->random) {
     $header_title .= ' '.make_button('فال', array('obj'=>$o->child, 'rid'=>$id));
   }

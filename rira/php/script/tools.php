@@ -53,7 +53,7 @@ function site_css ($s, $where = 'style') {
 
 function module_js ($s) {
   global $moddir, $modbase;
-  $rel = "script/js/$s.js";
+  $rel = "js/$s.js";
   if (file_exists($modbase.$rel))
     return "  <script type=\"text/javascript\" src=\"$moddir$rel\" defer=\"defer\"></script>\n";
   return '';

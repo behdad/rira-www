@@ -37,6 +37,13 @@ function make_button ($s, $p, $class = '') {
   return '<span class="button">&nbsp;&nbsp;'.make_link($s, $p, $class).'&nbsp;&nbsp;</span>';
 }
 
+function make_audio_button ($s, $url, $class = '') {
+  return '<span class="button">&nbsp;&nbsp;'
+	.'صدا '
+        .'<embed class="'.$class.'" autoplay="no" autostart="no" hidden="no" width="25" height="25" src="'.$url.'"></embed>'
+	.'&nbsp;&nbsp;</span>';
+}
+
 function hidden_input($c, $v) {
   return "  <input type=\"hidden\" name=\"$c\" value=\"$v\"/>\n";
 }

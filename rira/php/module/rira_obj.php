@@ -342,7 +342,7 @@ function &new_rira_obj ($object = '__rira_obj', $module = '') {
       $object = substr($object, $i+2);
     }
 
-    include_once BASE."module/$module/$object.php";
+    @include_once BASE."module/$module/$object.php";
     if (!class_exists($klass))
       return false;
     $instance = &new $klass;
