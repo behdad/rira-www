@@ -19,7 +19,7 @@
       $navpanel .= make_link($cfg['prev'].ezafi_form($o->name)." قبل", $o->prev_obj);
       $navempty = false;
     }
-    $navpanel .= "</td>\n<td><a href=\"http://behdad.org/\" title=\"بهداد اسفبهد\">b</a></td>\n<td class=\"left\">";
+    $navpanel .= "</td>\n<td><a href=\"http://behdad.org/\" title=\"بهداد اسفهبد\">b</a></td>\n<td class=\"left\">";
     if (!empty($o->next_obj)) {
       $navpanel .= make_link(ezafi_form($o->name)." بعد".$cfg['next'], $o->next_obj);
       $navempty = false;
