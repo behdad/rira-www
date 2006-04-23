@@ -80,8 +80,10 @@ class __rira_sqldb_obj extends __rira_obj {
 	  $query .= " where ${obj}_id=".sqlspecialchars($id);
         $res = &$this->db->query("$query $moreq");
       }
-      if (DB::isError($res))
-        return $this->header = array();
+      if (DB::isError($res)) {
+        $this->header = array();
+	return $this->header;
+      }
     }
     if ($res->numRows() < 1)
     {

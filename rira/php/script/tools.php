@@ -47,7 +47,7 @@ function site_js ($s, $where = 'js') {
 function site_css ($s, $where = 'style') {
   $rel = "$where/$s.css";
   if (file_exists(BASE.$rel))
-    return "  <link rel=\"stylesheet\" href=\"$rel\"/>\n";
+    return "  <link rel=\"stylesheet\" type=\"text/css\" href=\"$rel\"/>\n";
   return '';
 }
 
@@ -63,7 +63,7 @@ function module_css ($s) {
   global $moddir, $modbase;
   $rel = "style/$s.css";
   if (file_exists($modbase.$rel))
-    return "  <link rel=\"stylesheet\" href=\"$moddir$rel\"/>\n";
+    return "  <link rel=\"stylesheet\" type=\"text/css\" href=\"$moddir$rel\"/>\n";
   return '';
 }
 
@@ -75,7 +75,7 @@ function www_js ($s) {
 
 function www_css ($s) {
   if (!empty($s))
-    return "  <link rel=\"stylesheet\" href=\"$s\"/>\n";
+    return "  <link rel=\"stylesheet\" type=\"text/css\" href=\"$s\"/>\n";
   return '';
 }
 

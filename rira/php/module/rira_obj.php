@@ -253,7 +253,8 @@ class __rira_obj {
     $this->prev_page = false;
     $this->next_page = false;
     $this->num_rows = 0;
-    return $this->iterator = null;
+    $this->iterator = null;
+    return $this->iterator;
   }
 
   function free_contents_iterator () {
@@ -355,9 +356,11 @@ function &new_rira_obj ($object = '__rira_obj', $module = '') {
     }
 
     @include_once BASE."module/$module/$object.php";
-    if (!class_exists($klass))
-      return false;
-    $instance = &new $klass;
+    if (class_exists($klass))
+      $instance = &new $klass;
+    else
+      $instance = null;
+
     return $instance;
 }
 

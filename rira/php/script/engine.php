@@ -7,7 +7,7 @@ function get_page() {
   /* Query string vars */
   global $page, $mod, $obj, $id, $pageno, $lim, $ord, $q, $html_q, $rid, $onedoc;
   /* Outputs */
-  global $o, $moddir, $modbase;
+  global $o, $modules, $moddir, $modbase;
   global $cascade, $nocascade;
   global $title, $long_title, $header_title, $header, $onload, $implicit_body, $body, $pre_body;
 
@@ -16,17 +16,23 @@ function get_page() {
     $round++;
     $o = null;
     
-    if (!isset($mod) || !preg_match('/[a-z_]+/', $mod) || !file_exists(BASE."module/$mod"))
+    $moddir  = "module/$mod/";
+    $modbase = BASE.$moddir;
+
+    if (!isset($mod) || !$mod || !preg_match('/[a-z_]+/', $mod) || !file_exists(BASE."module/$mod"))
       $mod = "public";
-    if (!isset($page) || !preg_match('/[a-z_]+/', $page) || !file_exists(BASE."page/$page.php"))
+    if (!isset($page) || !$page || !preg_match('/[a-z_]+/', $page) || !file_exists(BASE."page/$page.php"))
       $page = "view";
-    if (!isset($obj) || !preg_match('/[a-z_]+/', $obj))
+    if (!isset($obj) || !$obj || !preg_match('/[a-z_]+/', $obj))
       $obj = "home";
     if (!isset($id) || !preg_match('/[a-z_0-9]+/', $id))
       $id = 0;
 
-    $moddir  = "module/$mod/";
-    $modbase = BASE.$moddir;
+
+    $module = array ();
+    @include_once $modbase."init.php";
+    $modules[$mod] = &$module;
+
     $title = $long_title = $header_title = $header = $onload = $implicit_body = $body = $pre_body = '';
     unset($cascade); unset($nocascade);
 
@@ -36,7 +42,7 @@ function get_page() {
       $o = new_rira_obj();
       $o->me = $obj;
     }
-    include "page/$page.php";
+    include BASE."page/$page.php";
     $implicit_body = ob_get_contents();
     ob_end_clean();
     if (!empty($noaccess))

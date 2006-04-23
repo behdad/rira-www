@@ -12,14 +12,12 @@
           $f = "${where}_${what}";
           $s .= $f($which);
         }
+    $s .= www_css("css.php?mod=$mod&bg=".@$modules[$mod]['bg_color']);
     $s .= www_js("http://behdad.org/js/isiri2901.js");
     $header = "$s$header";
   }
 
   $onload .= $o->get_onload();
-
-  if (!$cfg["debug"] && !ini_get("zlib.output_compression") && ini_get("output_handler") != "ob_gzhandler")
-    ob_start("ob_gzhandler");    
 
   include 'template/main.php';
 ?>

@@ -1,9 +1,0 @@
-body {
-  background-image: url(background.png);
-  background-color: #222;
-}
-
-a.nohighlight:hover {
-  background-color: #333;
-}
-
