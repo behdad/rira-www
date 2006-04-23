@@ -2,7 +2,7 @@
 
 body {
   color: #eef;
-  background: #222 left top no-repeat;
+  background: #000 left top no-repeat;
 }
 
 body, input {
@@ -25,7 +25,7 @@ a.nohighlight {
 }
 
 a.nohighlight:hover {
-  background-color: #333;
+  background-color: #111;
 }
 
 a.nohighlight:focus {

@@ -28,8 +28,13 @@ class __rira_obj {
   }
 
   function &create_parent () {
-    if (empty($this->parent) || isset($this->p))
-      return isset($this->p) ? $this->p : NULL;
+    if (isset ($this->p))
+      return $this->p;
+    if (empty($this->parent)) {
+      $this->p = NULL;
+      return $this->p;
+    }
+
     if (!($this->p = &new_rira_obj($this->parent, $this->module)))
       return false;
     if (isset($this->header))
@@ -41,8 +46,13 @@ class __rira_obj {
   }
 
   function &create_child () {
-    if (empty($this->child) || isset($this->c))
-      return isset($this->c) ? $this->c : NULL;
+    if (isset ($this->c))
+      return $this->c;
+    if (empty($this->child)) {
+      $this->c = NULL;
+      return $this->c;
+    }
+
     if (!($this->c = &new_rira_obj($this->child, $this->module)))
       return false;
     if (isset($this->content))
@@ -95,7 +105,9 @@ class __rira_obj {
     $this->prev_obj = false;
     $this->next_obj = false;
     
-    return $this->header = array();
+    $this->header = array();
+
+    return $this->header;
   }
 
   function get_title () {
