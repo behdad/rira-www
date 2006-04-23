@@ -4,3 +4,6 @@ div.contents *{
 div.navpanel {
   margin: auto;
 }
+div.main {
+  text-align: center;
+}
