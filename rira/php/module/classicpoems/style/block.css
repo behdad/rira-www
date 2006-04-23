@@ -1,8 +1,9 @@
+div.contents {
+  text-align: center;
+}
 div.contents *{
   margin: auto;
-  text-align: center;
 }
 div.navpanel {
   margin: auto;
-  text-align: center;
 }
