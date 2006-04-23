@@ -1,7 +1,7 @@
 <?php
 
 define('BASE', dirname(__FILE__).'/../');
-define(custom, 'script/custom');
+define('custom', 'script/custom');
 $script_path = dirname (__FILE__);
 $custom_path = "$script_path/custom/";
 set_include_path($custom_path.PATH_SEPARATOR.$script_path.PATH_SEPARATOR.get_include_path());
