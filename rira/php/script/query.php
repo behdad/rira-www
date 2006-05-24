@@ -42,13 +42,13 @@ if (isset($ord)) {
   $ord = $ord < 0 ? 0 : $ord;
 }
 
-if (!isset($mod) || !$mod || !preg_match('/[a-z_]+/', $mod) || !file_exists(BASE."module/$mod"))
+if (!isset($mod) || !$mod || !preg_match('/^[a-z_]+$/', $mod) || !file_exists(BASE."module/$mod"))
   $mod = "public";
-if (!isset($page) || !$page || !preg_match('/[a-z_]+/', $page) || !file_exists(BASE."page/$page.php"))
+if (!isset($page) || !$page || !preg_match('/^[a-z_]+$/', $page) || !file_exists(BASE."page/$page.php"))
   $page = "view";
-if (!isset($obj) || !$obj || !preg_match('/[a-z_]+/', $obj))
+if (!isset($obj) || !$obj || !preg_match('/^[a-z_]+$/', $obj))
   $obj = "home";
-if (!isset($id) || !preg_match('/[a-z_0-9]+/', $id))
+if (!isset($id) || !preg_match('/^[a-z_0-9]+$/', $id))
   $id = 0;
 
 ?>
