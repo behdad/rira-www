@@ -1,0 +1,18 @@
+.vsp { /* verse separator */
+  width: 3em;
+}
+
+.v { /* verse container */
+  text-align: justify;
+  text-align-last: justify; /* for IE */
+  border: 0;
+}
+
+.verse {
+  white-space: nowrap; 
+}
+
+/* For GECKO only? */
+.b { 
+  padding: 0 50% 0 50%; 
+}

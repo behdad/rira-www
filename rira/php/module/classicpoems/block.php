@@ -8,8 +8,11 @@ class classicpoems__block extends __rira_default_obj {
   var $nocascade = true;
 
   function get_html_header() {
-    return www_js("http://behdad.org/js/poem_justify.js").
-           www_css("http://behdad.org/js/poem_justify.css").
+    return www_js("style/poem_justify.js").
+           www_css("style/poem_justify.css").
+	   "<!--[if IE]>".
+	   www_css("style/poem_justify_ie.css").
+	   "<![endif]-->".
 	   module_css("block");
   }
 
