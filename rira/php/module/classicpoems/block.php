@@ -8,10 +8,10 @@ class classicpoems__block extends __rira_default_obj {
   var $nocascade = true;
 
   function get_html_header() {
-    return www_js("style/poem_justify.js").
-           www_css("style/poem_justify.css").
+    return site_js("poem_justify",'style').
+           site_css("poem_justify").
 	   "<!--[if IE]>".
-	   www_css("style/poem_justify_ie.css").
+	   site_css("poem_justify_ie").
 	   "<![endif]-->".
 	   module_css("block");
   }
