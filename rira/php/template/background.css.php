@@ -7,11 +7,12 @@
   $url = $moddir.$rel;
   if (file_exists ($modbase.$rel)) {
     echo "
+/*
 body {
   filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='$url',sizingMethod='image');
-}
+} */
 html>body {
-  background-image: url(\"$url\");
+  background-image: url(\"$url\"); 
 }
 ";
   }
