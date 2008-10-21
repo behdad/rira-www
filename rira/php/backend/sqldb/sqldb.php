@@ -32,7 +32,7 @@ class sqldb_backend {
 
   }
 
-  function query($q) {
+  function &query($q) {
     $res = &$this->db->query ($q);
 
     if ($this->debug) {
@@ -72,7 +72,7 @@ class sqldb_backend {
 }
 
 class sqldb_backend_factory {
-  function get_sqldb () {
+  static function &get_sqldb () {
     static $sqldb = NULL;
     if (!$sqldb) {
       $sqldb = new sqldb_backend(true);
