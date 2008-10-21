@@ -1,6 +1,6 @@
-DirectoryIndex index.php index.html
+DirectoryIndex index.php5 index.php index.html
 Options +FollowSymLinks -Indexes
-<FilesMatch "Entries|Repository|Root">
+<FilesMatch "^CVSROOT$|^CVS$|^[.]|^admin$">
     Order Deny,Allow
     Deny from all
 </FilesMatch>
