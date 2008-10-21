@@ -334,9 +334,9 @@ class __rira_obj {
     $h = &$this->header;
     $s = "+\"x $mod\"";
     if (!empty($h["${me}_id"]))
-      $s .= " AND +\"".$h["${me}_id"]." $me\"";
+      $s .= " +\"".$h["${me}_id"]." $me\"";
     if (!empty($leaf_obj))
-      $s .= " AND +\"$leaf_obj x\"";
+      $s .= " +\"$leaf_obj x\"";
     return $s;
   }
 
