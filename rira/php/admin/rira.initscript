@@ -6,7 +6,7 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 case $1 in
 
 	start)
-		service identd start
+		service oidentd start
 		service postgresql start
 		service httpd start
 	;;
@@ -14,11 +14,11 @@ case $1 in
 	stop)
 		service httpd stop
 		service postgresql stop
-		service identd stop
+		service oidentd stop
 	;;
 
 	reload)
-		service identd reload
+		service oidentd reload
 		service postgresql reload
 		service httpd reload
 	;;
