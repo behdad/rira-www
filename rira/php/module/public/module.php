@@ -15,7 +15,8 @@ class public__module extends __rira_default_obj {
   }
 
   function &get_header_data () {
-    return array();
+    $ret = array();
+    return $ret;
   }
 }
 
