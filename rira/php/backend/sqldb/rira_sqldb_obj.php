@@ -5,7 +5,7 @@ include_once BASE.'backend/sqldb/sqldb.php';
 class __rira_sqldb_obj extends __rira_obj {
 
   function __rira_sqldb_obj () {
-    $this->db = &sqldb_backend_factory::get_sqldb();
+    $this->db = sqldb_backend_factory::get_sqldb();
     parent::__rira_obj();
   }
 
@@ -29,7 +29,7 @@ class __rira_sqldb_obj extends __rira_obj {
         $query .= " and $this->parent"."_id=".sqlspecialchars($p_id);
     }
     $query .= " limit 1";
-    $res = &$this->db->query($query);
+    $res = $this->db->query($query);
     if (DB::isError($res) || $res->numRows() < 1)
       return false;
     $row = &$res->fetchRow();
@@ -72,7 +72,7 @@ class __rira_sqldb_obj extends __rira_obj {
     } else
       $query = $q;
     $moreq = "limit 1";
-    $res = &$this->db->query("$query $moreq");
+    $res = $this->db->query("$query $moreq");
     if (DB::isError($res)) {
       if (empty($q)) {
         $query = "select * from ".$this->get_table('', $obj);
@@ -126,7 +126,7 @@ class __rira_sqldb_obj extends __rira_obj {
     } else
       $query = $q;
     $moreq = " limit ".($limit+1)." offset ".(($pageno-1)*$limit);
-    $res = &$this->db->query("$query $moreq");
+    $res = $this->db->query("$query $moreq");
     if (DB::isError($res)) {
       $this->num_rows = -1;
       return $this->iterator = null;

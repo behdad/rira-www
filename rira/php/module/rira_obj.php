@@ -42,6 +42,11 @@ class __rira_obj {
     if (!empty($this->p->child) && $this->p->child == $this->me) {
       $this->p->c = &$this;
     }
+
+    $h = $this->header;
+    $p_id = $this->p->me."_id";
+    $this->up_obj = array('mod'=>$this->p->module, 'obj'=>$this->p->me, 'id'=>isset($h[$p_id])?$h[$p_id]:0);
+
     return $this->p;
   }
 

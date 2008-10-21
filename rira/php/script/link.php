@@ -9,7 +9,7 @@ function link_set_prop($p, $x) {
     $GLOBALS[$x] = $p[$x];
 }
 
-function make_link ($s, $p, $class = '') {
+function make_url ($p) {
   global $cfg;
   $lim = link_get_prop($p, 'lim');
   $page = link_get_prop($p, 'page');
@@ -17,7 +17,7 @@ function make_link ($s, $p, $class = '') {
   $obj = link_get_prop($p, 'obj');
   $id = link_get_prop($p, 'id');
   $q = link_get_prop($p, 'q');
-  $t = "<a href=\"?page=$page";
+  $t = "?page=$page";
   !empty($mod) && $t .= "&amp;mod=$mod";
   !empty($obj) && $t .= "&amp;obj=$obj";
   isset($p['rid']) && $t .= "&amp;rid=$p[rid]";
@@ -26,7 +26,18 @@ function make_link ($s, $p, $class = '') {
   (isset($p['pageno']) && $p['pageno']>1) && $t .= "&amp;pageno=$p[pageno]";
   (isset($p['ord']) && $p['ord']>0) && $t .= "&amp;ord=$p[ord]";
   (isset($p['q']) && !empty($q)) && $t .= "&amp;q=".urlencode($q);
-  $t .= '"';
+  return $t;
+}
+
+function make_link ($s, $p, $class = '') {
+  global $cfg;
+  $lim = link_get_prop($p, 'lim');
+  $page = link_get_prop($p, 'page');
+  $mod = link_get_prop($p, 'mod');
+  $obj = link_get_prop($p, 'obj');
+  $id = link_get_prop($p, 'id');
+  $q = link_get_prop($p, 'q');
+  $t = '<a href="'.make_url($p).'"';
   if ($class)
     $t .= ' class="'.$class.'"';
   $t .= ">$s</a>";

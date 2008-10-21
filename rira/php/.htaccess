@@ -1,5 +1,5 @@
 Options -Indexes
-DirectoryIndex index.php
+DirectoryIndex index.php5 index.php
 <Files CVS>
     Order allow,deny
     Deny from all

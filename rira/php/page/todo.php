@@ -9,9 +9,6 @@
 	- do nohighlight in span instead of <a>, simplifies CSS. should we do
 	  that?  humm, link the numbers, not the text.  what about poetry?
 	- add navigation links and icon too.
-	- add more meta: title should be page title, not "RiRa".  set
-	  meta for module, object, id, page?, ...
-	  dynamic "keywords" that features all header (haafez, ghazaliaat...!)
 	- public/module and othermodules/home should share [long_]title.
 	- classicpoems__home should get deeper.
 	- unify <h1>, <h2> generation...?
@@ -19,7 +16,7 @@
 	- non-integer $ord, use $ord as enumerate text.
 	- descending sort order
 	- list pages google style
-	- link rel copyright!  link rel contents, chapter, section?... rev?
+	- link rel contents, chapter, section?... rev?
 	- Instead of lists, use slashes or vertical bars to separate items.
 
 
@@ -46,5 +43,5 @@
 	- ContemporaryPoems module
 	- Children module
 
-	- Waw-Hamza doesn't appear in the data. Fix the convertor and reimport the data.
+	- Waw-Hamza doesn't appear in the data. Fix the convertor and reimport the data. Ugh!
 */ ?>
