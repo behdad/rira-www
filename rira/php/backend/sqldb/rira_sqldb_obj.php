@@ -1,6 +1,7 @@
 <?php
 
 include_once BASE.'backend/sqldb/sqldb.php';
+include_once BASE.'backend/luceneindex/luceneindex.php';
 
 class __rira_sqldb_obj extends __rira_obj {
 
@@ -129,7 +130,8 @@ class __rira_sqldb_obj extends __rira_obj {
     $res = $this->db->query("$query $moreq");
     if (DB::isError($res)) {
       $this->num_rows = -1;
-      return $this->iterator = null;
+      $this->iterator = null;
+      return $this->iterator;
     }
     if ($res->numRows() < 1) {
       if ($this->db->debug) {
@@ -155,6 +157,12 @@ class __rira_sqldb_obj extends __rira_obj {
     parent::free_contents_iterator();
   }
 
+  function search ($q, $limit=0) {
+    $q = get_search_query($q);
+    $idnq = $this->get_idn_query();
+    $luceneindex = luceneindex_backend_factory::get_luceneindex (false);
+    return $luceneindex->query ($q, $idnq, $limit);
+  }
 }
 
 ?>

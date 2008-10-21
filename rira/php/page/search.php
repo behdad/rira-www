@@ -21,20 +21,17 @@
     array('page'=>'search'));
 
   if (!empty($q)) {
-    $new_q = get_search_query($q);
-  
-    $idnq = $o->get_idn_query();
+    $hits = $o->search ($q);
+
+    //$clean_q = $res[0];
+    $clean_q = $q;
     $start = (($pageno-1)*$lim);
-    $cmd = "echo ".escapeshellarg(($lim+1)."\n$start\n$idnq\n$new_q")
-         . " | ".BASE."../config search";
-    $res = explode("\n", `$cmd`);
-    $clean_q = $res[0];
 
     $title = "جستجو برای ${q}&rlm;";
     $long_title = "نتایجِ جستجو برای ".notfound(found($html_q, $clean_q, '+'), $clean_q, '-');
 
-    $o->total_rows = $res[1];
-    $o->num_rows = $res[2];
+    $o->total_rows =  count ($hits);
+    $o->num_rows = max (0, min ($lim+1, $o->total_rows - $start));
     if ($o->num_rows > $lim && $o->num_rows != $o->total_rows) {
       $o->num_rows = $lim;
       $o->next_page = true;
@@ -52,9 +49,11 @@
     $d = &new __rira_obj;
     $body .= $d->body_begin();
     for ($i = 0; $i < $o->num_rows; $i++) {
+      $hit = &$hits[$start + $i]; unset($hits[$start + $i]);
       $d->row_num = $start + $i + 1;
-      $idn = &$res[$i*2+3]; unset($res[($i+1)*2]);
-      $text = &$res[$i*2+4]; unset($res[($i+1)*2+1]);
+      $idn = $hit->idn;
+      $text = $hit->contents;
+      unset($hit);
       
       if (preg_match("/x ([^ ]+) .* ([0-9]+) ([^ ]+) +x *$/", $idn, $fields)) {
         $newmod = $fields[1];

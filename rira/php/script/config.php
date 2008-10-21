@@ -39,6 +39,9 @@ $cfg['dsn'] = 'pgsql://apache@localhost/rira';
 $cfg['db_persistent'] = true;
 $cfg['db_debug'] = $cfg['debug'];
 
+/* Lucene backend */
+$cfg['luceneindex'] = dirname (__FILE__)."/../backend/luceneindex/index";
+
 /* Object engine */
 $cfg['max_redirect'] = 5;
 
