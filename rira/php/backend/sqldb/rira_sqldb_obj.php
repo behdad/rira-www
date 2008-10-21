@@ -1,7 +1,6 @@
 <?php
 
 include_once BASE.'backend/sqldb/sqldb.php';
-include_once BASE.'backend/luceneindex/luceneindex.php';
 
 class __rira_sqldb_obj extends __rira_obj {
 
@@ -160,6 +159,7 @@ class __rira_sqldb_obj extends __rira_obj {
   function search ($q, $limit=0) {
     $q = get_search_query($q);
     $idnq = $this->get_idn_query();
+    include_once BASE.'backend/luceneindex/luceneindex.php';
     $luceneindex = luceneindex_backend_factory::get_luceneindex (false);
     return $luceneindex->query ($q, $idnq, $limit);
   }
