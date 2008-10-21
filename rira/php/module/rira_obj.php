@@ -8,7 +8,7 @@ class __rira_obj {
   var $searchindexed = false;
 
   function __rira_obj () {
-    $m = &get_class($this);
+    $m = get_class($this);
     $i = strpos($m, '__');
     if ($i === false) {
       $this->module = '';
@@ -357,7 +357,7 @@ function &new_rira_obj ($object = '__rira_obj', $module = '') {
 
     @include_once BASE."module/$module/$object.php";
     if (class_exists($klass))
-      $instance = &new $klass;
+      $instance = new $klass;
     else
       $instance = null;
 
