@@ -28,7 +28,7 @@ class luceneindex_backend {
     Zend_Search_Lucene::setDefaultSearchField('contents');
     Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('utf-8');
     Zend_Search_Lucene_Search_QueryParser::setDefaultOperator(Zend_Search_Lucene_Search_QueryParser::B_AND);
-    Zend_Search_Lucene_Analysis_Analyzer::setDefault(new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
+    Zend_Search_Lucene_Analysis_Analyzer::setDefault(new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num());
 
     if (!$silent && @preg_match('/\pL/u', 'a') != 1) {
       die ("PCRE unicode support needed for UTF-8 lucene is turned off.");
