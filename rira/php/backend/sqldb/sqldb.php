@@ -72,7 +72,7 @@ class sqldb_backend {
 }
 
 class sqldb_backend_factory {
-  static function &get_sqldb () {
+  /*static*/ function &get_sqldb () {
     static $sqldb = NULL;
     if (!$sqldb) {
       $sqldb = new sqldb_backend(true);
