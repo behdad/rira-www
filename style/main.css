@@ -1,16 +1,18 @@
 /* ****************** Style for page body *************** */
 
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css);
+
 body {
   color: #eef;
   background: #000 left top no-repeat;
 }
 
 body, input {
-  font-family: Roya, Nazli, Nesf2, Tahoma, Arial, sans-serif;
+  font-family: Roya, Nazli, "Droid Arabic Naskh", Nesf2, Tahoma, Arial, sans-serif;
 }
 
 h1, h2, h3, h4 {
-  font-family: Titr, Nazli, Nesf2, Tahoma, serif;
+  font-family: Titr, Nazli, "Droid Arabic Naskh", Nesf2, Tahoma, serif;
   text-align: center;
 }
 
