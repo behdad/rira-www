@@ -53,9 +53,9 @@ $cfg['snippet_affix_len'] = 20;
 $cfg['search_snippets_num'] = 5;
 
 /* Presentation */
-$cfg['missing_title'] = '&#9633;'; // U+25A1 WHITE SQUARE
-$cfg['ellipsis'] = '&#8230;'; // U+2026 HORIZONTAL ELLIPSIS
-$cfg['separator'] = ' > ';
+$cfg['missing_title'] = '&#x25A1;'; // U+25A1 WHITE SQUARE
+$cfg['ellipsis'] = '&#x2026;'; // U+2026 HORIZONTAL ELLIPSIS
+$cfg['separator'] = ' &#x203A; '; // U+203A SINGLE RIGHT-POINTING ANGLE QUOTATION MARK (nb. is mirroring!)
 $cfg['prev'] = '';
 $cfg['next'] = '';
 /* Some alternatives: */
