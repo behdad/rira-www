@@ -202,10 +202,10 @@ class __rira_obj {
       else
         if ((isset($fl['page']) && $fl['page'] == 'search') || $page == 'search')
 	  $fl['page'] = 'view';
-      $title = make_link($title, $fl, $linked == 1 ? 'nohighlight' : '');
+      $title = make_breadcrumb($title, $fl, $linked == 1 ? 'nohighlight' : '');
       unset($fl);
     }
-    $this->header_string[$linked] = $p_h . (!empty($p_h) && !empty($this->title) ? $cfg['separator'] : '') . $title;
+    $this->header_string[$linked] = $p_h . $title;
     $this->canonical_title = empty($this->title) ? $p_t : $this->title;
     $this->canonical_long_title = empty($this->long_title) ? $p_t : $this->long_title;
     return $this->header_string[$linked];

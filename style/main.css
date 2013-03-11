@@ -79,6 +79,10 @@ ul.contents {
   list-style-type: none;
 }
 
+div.breadcrumb {
+  display: inline;
+}
+
 /* Navigation panel */
 
 div.navpanel {

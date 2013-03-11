@@ -38,6 +38,15 @@ function make_link ($s, $p, $class = '') {
   return $t;
 }
 
+function make_breadcrumb ($s, $p, $class = '') {
+  global $cfg;
+  $t = '<div class="breadcrumb" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">'.$cfg['separator'].'<a itemprop="url" href="'.make_url($p).'"';
+  if ($class)
+    $t .= ' class="'.$class.'"';
+  $t .= '><span itemprop="title">'.$s.'</span></a></div>';
+  return $t;
+}
+
 function make_button ($s, $p, $class = '') {
   return '<span class="button">&nbsp;&nbsp;'.make_link($s, $p, $class).'&nbsp;&nbsp;</span>';
 }
