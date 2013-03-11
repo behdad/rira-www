@@ -31,12 +31,6 @@ function make_url ($p) {
 
 function make_link ($s, $p, $class = '') {
   global $cfg;
-  $lim = link_get_prop($p, 'lim');
-  $page = link_get_prop($p, 'page');
-  $mod = link_get_prop($p, 'mod');
-  $obj = link_get_prop($p, 'obj');
-  $id = link_get_prop($p, 'id');
-  $q = link_get_prop($p, 'q');
   $t = '<a href="'.make_url($p).'"';
   if ($class)
     $t .= ' class="'.$class.'"';
