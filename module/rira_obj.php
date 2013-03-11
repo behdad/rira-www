@@ -265,20 +265,41 @@ class __rira_obj {
   function free_contents_iterator () {
   }
 
-  function body_begin () {
-    $this->last_child_id = -1;
-    $this->effective_row_num = 0;
+  function body_begin_format ()
+  {
     return '<ul class="contents">'."\n";
   }
 
-  function body_row ($default = '', $recurse = 'noX') {
+  function body_row_format ($contents, $row_num = '')
+  {
+    $s = '<li>';
+    if ($row_num)
+      $s .= localized_number($row_num).'. ';
+    $s .= $contents;
+    $s .= "</li>\n";
+    return $s;
+  }
+
+  function body_end_format ()
+  {
+    return '</ul>'."\n";
+  }
+
+
+  function body_begin () {
+    $this->last_child_id = -1;
+    $this->effective_row_num = 0;
+    return $this->body_begin_format ();
+  }
+
+  function body_row_content ($default = '', $recurse = 'noX')
+  {
     global $cfg, $onedoc;
 
     if ($recurse == 'noX')
       $recurse = $onedoc;
-    $s = '<li>';
-    if (isset($this->row_num))
-      $s .= localized_number($this->row_num).'. ';
+
+    $s = '';
     if (isset($this->c)) {
       $t = $this->c->get_long_title();
       if (isset($this->c->child))
@@ -318,14 +339,23 @@ class __rira_obj {
       $s .= $o->body_end();
     }
 
-    $s .= "</li>\n";
     return $s;
   }
 
-  function body_end () {
+  function body_row ($default = '', $recurse = 'noX')
+  {
+    $row_num = '';
+    if (isset($this->row_num))
+      $row_num .= $this->row_num;
+    $s = $this->body_row_content ($default, $recurse);
+    return $this->body_row_format ($s, $row_num);
+  }
+
+  function body_end ()
+  {
     //if ($this->effective_row_num == 1)
     //  $this->cascade = array('obj'=>$this->child, 'id'=>$this->content[$this->child."_id"]);
-    return '</ul>'."\n";
+    return $this->body_end_format ();
   }
 
   function get_idn_query ($leaf_obj = '') {
