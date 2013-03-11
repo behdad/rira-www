@@ -1,5 +1,5 @@
 <?php
 
-$module['bg_color'] = '031';
+$module['bg_color'] = '20462C';
 
 ?>
