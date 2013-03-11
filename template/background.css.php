@@ -35,6 +35,11 @@ body {
 a.nohighlight:hover {
   background-color: #$hlbg;
 }
+
+hr {
+  color: #$hlbg;
+  background-color: #$hlbg;
+}
 ";
   }
 ?>
