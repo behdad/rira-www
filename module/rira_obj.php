@@ -274,7 +274,7 @@ class __rira_obj {
   {
     $s = '<li>';
     if ($row_num)
-      $s .= localized_number($row_num).'. ';
+      $s .= localized_number($row_num).' ';
     $s .= $contents;
     $s .= "</li>\n";
     return $s;
