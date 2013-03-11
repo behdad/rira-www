@@ -109,7 +109,7 @@ class __rira_obj {
 
     $this->prev_obj = false;
     $this->next_obj = false;
-    
+
     $this->header = array();
 
     return $this->header;
@@ -250,7 +250,7 @@ class __rira_obj {
       $GLOBALS['pageno'] = (int)(($ord-1) / $this->get_limit()) + 1;
     return $GLOBALS['pageno'];
   }
-  
+
   function &get_contents_iterator ($q = '') {
     if (isset ($this->iterator))
       return $this->iterator;
@@ -270,7 +270,7 @@ class __rira_obj {
     $this->effective_row_num = 0;
     return '<ul class="contents">'."\n";
   }
-  
+
   function body_row ($default = '', $recurse = 'noX') {
     global $cfg, $onedoc;
 
@@ -321,7 +321,7 @@ class __rira_obj {
     $s .= "</li>\n";
     return $s;
   }
-  
+
   function body_end () {
     //if ($this->effective_row_num == 1)
     //  $this->cascade = array('obj'=>$this->child, 'id'=>$this->content[$this->child."_id"]);
