@@ -1,6 +1,6 @@
 DirectoryIndex index.php5 index.php index.html
 Options +FollowSymLinks -Indexes
-<FilesMatch "^CVSROOT$|^CVS$|^[.]|^admin$">
+<FilesMatch "^[.]|^admin$">
     Order Deny,Allow
     Deny from all
 </FilesMatch>
