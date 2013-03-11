@@ -15,7 +15,7 @@ function get_page() {
   do {
     $round++;
     $o = null;
-    
+
     $moddir  = "module/$mod/";
     $modbase = BASE.$moddir;
 
@@ -29,9 +29,8 @@ function get_page() {
       $id = 0;
 
 
-    $module = array ();
+    $module = &$modules[$mod];
     @include_once $modbase."init.php";
-    $modules[$mod] = &$module;
 
     $title = $long_title = $header_title = $header = $onload = $implicit_body = $body = $pre_body = '';
     unset($cascade); unset($nocascade);
