@@ -4,6 +4,10 @@ body {
   font-family: Amiri, "Arabic Typesetting", "Arabic Transparent", "Courier New", Roya, Nazli, "Lucida Sans Unicode", Arial, Tahoma, sans-serif;
 }
 
-div.contents {
+div.sura {
   font-size: larger;
+  text-align: justify;
+}
+div.navpanel {
+  margin: auto;
 }
