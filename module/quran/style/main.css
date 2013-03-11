@@ -1,5 +1,7 @@
+@import url(http://fonts.googleapis.com/earlyaccess/amiri.css);
+
 body {
-  font-family: "Arabic Typesetting", "Arabic Transparent", "Courier New", Roya, Nazli, "Lucida Sans Unicode", Arial, Tahoma, sans-serif;
+  font-family: Amiri, "Arabic Typesetting", "Arabic Transparent", "Courier New", Roya, Nazli, "Lucida Sans Unicode", Arial, Tahoma, sans-serif;
 }
 
 div.contents {
