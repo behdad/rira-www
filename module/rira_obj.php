@@ -292,12 +292,9 @@ class __rira_obj {
     return $this->body_begin_format ();
   }
 
-  function body_row_content ($default = '', $recurse = 'noX')
+  function body_row_content ($default = '')
   {
-    global $cfg, $onedoc;
-
-    if ($recurse == 'noX')
-      $recurse = $onedoc;
+    global $cfg, $onedoc, $pageno;
 
     $s = '';
     if (isset($this->c)) {
@@ -319,35 +316,15 @@ class __rira_obj {
     } else
       $s .= empty($default) ? $cfg['missing_title'] : $default;
 
-    if ($recurse && isset($this->c)) {
-      $o = $this->c;
-      $iterator = $o->get_contents_iterator();
-      if (!isset($o->next_content))
-        $o->set_next_content($o->iterator->fetchRow());
-      $o->row_num = ($pageno - 1) * $o->get_limit();
-      $body .= $o->body_begin();
-      for ($i = 0; $i < $o->num_rows; $i++) {
-        $o->set_content($o->next_content);
-        $o->set_next_content($o->iterator->fetchRow());
-	$o->row_num++;
-        $body .= $o->body_row();
-      }
-      $body .= $o->body_end();
-      unset($o->content);
-      $s .= $o->body_begin();
-      $s .= $o->body_row();
-      $s .= $o->body_end();
-    }
-
     return $s;
   }
 
-  function body_row ($default = '', $recurse = 'noX')
+  function body_row ($default = '')
   {
     $row_num = '';
     if (isset($this->row_num))
       $row_num .= $this->row_num;
-    $s = $this->body_row_content ($default, $recurse);
+    $s = $this->body_row_content ($default);
     return $this->body_row_format ($s, $row_num);
   }
 
