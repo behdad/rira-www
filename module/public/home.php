@@ -12,7 +12,7 @@ class public__home extends __rira_sqldb_home {
     if (file_exists ($audio))
       $this->audio_url = $audio;
 
-    $this->__rira_sqldb_home();
+    parent::__construct();
   }
 
   function get_idn_query ($leaf_obj = '') {

@@ -9,7 +9,7 @@ class public__module extends __rira_default_obj {
   var $searchindexed = false;
 
   function public__module () {
-    parent::__rira_default_obj();
+    parent::__construct();
     global $id;
     $this->cascade = array('mod'=>$id, 'obj'=>false, 'id'=>false);
   }
