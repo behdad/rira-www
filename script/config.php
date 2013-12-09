@@ -17,7 +17,7 @@ $cfg['locale'] = 'fa_IR';
 $cfg['dir'] = 'rtl';
 
 /* Sql backend */
-/*
+/* 
  * Note: The following setting works if:
  *   - Postgres user 'apache' exists.
  *   - Postgres database 'rira' exists.
@@ -46,7 +46,7 @@ $cfg['luceneindex'] = realpath (dirname (__FILE__))."/../backend/luceneindex/ind
 $cfg['max_redirect'] = 5;
 
 /* View and search */
-$cfg['rows_per_page'] = 1000;
+$cfg['rows_per_page'] = 20;
 $cfg['rows_per_page_max'] = 10000;
 $cfg['short_title_len'] = 200;
 $cfg['snippet_affix_len'] = 20;
