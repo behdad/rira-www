@@ -109,7 +109,7 @@ function index_module ($luceneindex, $sqldb, $mod)
   $class_name = "${mod}__${obj}";
   if (!class_exists($class_name))
     continue;
-  $o = &new $class_name;
+  $o = new $class_name;
   do {
     if ($o->searchindexed) {
       echo "object $o->me\n";

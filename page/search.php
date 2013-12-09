@@ -46,7 +46,7 @@
     $page = 'view';
     $old_id = $id;
     $old_obj = $obj;
-    $d = &new __rira_obj;
+    $d = new __rira_obj;
     $body .= $d->body_begin();
     for ($i = 0; $i < $o->num_rows; $i++) {
       $hit = &$hits[$start + $i]; unset($hits[$start + $i]);

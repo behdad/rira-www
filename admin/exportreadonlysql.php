@@ -64,7 +64,7 @@ function dump_table ($to, $from) {
     $class_name = "${mod}__${obj}";
     if (!class_exists($class_name))
       continue;
-    $o = &new $class_name;
+    $o = new $class_name;
     while ($o = $o->create_child()) {
       if ($o->searchindexed) {
         $obj = $o->me;
