@@ -13,7 +13,8 @@
           $s .= $f($which);
         }
     $s .= www_css("css.php?mod=$mod&bg=".@$modules[$mod]['bg_color']);
-    $s .= www_js("http://behdad.org/js/isiri2901.js");
+    #$s .= www_js("http://behdad.org/js/isiri2901.js");
+    $s .= www_js("style/isiri2901.js");
     $header = "$s$header";
   }
 
