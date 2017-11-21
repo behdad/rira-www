@@ -1,7 +1,7 @@
 <?php
 
 function localized_number($str) {
-  return preg_replace('/([0-9])/e', 'chr(0xdb).chr(0xb0+$1)', $str);
+  return preg_replace_callback('/([0-9])/', function ($m) { return chr(0xdb).chr(0xb0+$m[0]); }, $str);
 }
 
 // This function is bogus, as it adds YEH to all words
