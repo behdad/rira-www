@@ -1,6 +1,7 @@
 <?php
 
-define('utf8char', '(?:[\x00-\x7f]|[\xC0-\xDF][\x80-\xBF]|[\xE0-\xEF][\x80-\xBF][\x80-\xBF])');
+#define('utf8char', '(?:[\x00-\x7f]|[\xC0-\xDF][\x80-\xBF]|[\xE0-\xEF][\x80-\xBF][\x80-\xBF])');
+define('utf8char', '.');
 
 function get_search_query ($q = '') {
   empty($q) && $q = $GLOBALS['q'];
@@ -9,10 +10,11 @@ function get_search_query ($q = '') {
   static $from = array ('/ and /i', '/ or /i', '/ not /i', '/ و /', '/ یا /', '/ بدون /', '/×/', '/؟/', '/«/', '/»/');
   static $to   = array (' AND '   , ' OR '   , ' NOT '   , ' AND ', ' OR '  , ' NOT '   , '*'  , '?'  , '"'  , '"'  );
   $q = " $q \"\"";
-  $q = preg_replace_callback('/(.*?)(?:"|«)(.*?)(?:"|»)/',
-    function ($m) { return preg_replace($from, $to, $m[0]).$m[1]; },
+  $q = preg_replace_callback('/(.*?)(?:"|«)(.*?)(?:"|»)/u',
+    #function ($m) { return preg_replace($from, $to, $m[1]).$m[2]; },
+    function ($m) { return $m[1].$m[2]; },
     $q);
-  $q = substr($q, 0, -2);
+  #$q = substr($q, 0, -2);
   return $q;
 }
 
@@ -37,14 +39,14 @@ function found ($s, $q = '', $sel = '') {
   empty($q) && $q = $GLOBALS['q'];
   if (empty($q))
     return $s;
-  return trim(preg_replace("/".get_query_pregexp($q, $sel)."/i", '\1<span class="found">\2</span>\3', "    $s    "));
+  return trim(preg_replace("/".get_query_pregexp($q, $sel)."/ui", '\1<span class="found">\2</span>\3', "    $s    "));
 }
 
 function notfound ($s, $q = '', $sel = '-') {
   empty($q) && $q = $GLOBALS['q'];
   if (empty($q))
     return $s;
-  return trim(preg_replace("/".get_query_pregexp($q, $sel)."/i", '\1<span class="notfound">\2</span>\3', "    $s    "));
+  return trim(preg_replace("/".get_query_pregexp($q, $sel)."/ui", '\1<span class="notfound">\2</span>\3', "    $s    "));
 }
 
 function snippet ($s, $q = '') {
@@ -52,7 +54,7 @@ function snippet ($s, $q = '') {
   $l = $cfg['snippet_affix_len'] * 2;
   $qr = get_query_pregexp($q);
   $t = '';
-  $query = '/(?:\s[^|]{0,'.$l.'}?)?'.$qr.'(.{0,'.($l).'}'.$qr.')*(?:[^|]{0,'.$l.'}\s)?/i';
+  $query = '/(?:\s[^|]{0,'.$l.'}?)?'.$qr.'(.{0,'.($l).'}'.$qr.')*(?:[^|]{0,'.$l.'}\s)?/ui';
   preg_match_all($query, "       $s        ", $res, PREG_SET_ORDER);
   $i = 0;
   foreach ($res as $match) {
