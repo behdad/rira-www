@@ -9,7 +9,9 @@ function get_search_query ($q = '') {
   static $from = array ('/ and /i', '/ or /i', '/ not /i', '/ و /', '/ یا /', '/ بدون /', '/×/', '/؟/', '/«/', '/»/');
   static $to   = array (' AND '   , ' OR '   , ' NOT '   , ' AND ', ' OR '  , ' NOT '   , '*'  , '?'  , '"'  , '"'  );
   $q = " $q \"\"";
-  $q = preg_replace('/(.*?)(?:"|«)(.*?)(?:"|»)/e', 'preg_replace($from, $to, \'\1\').\'"\2"\'', $q);
+  $q = preg_replace_callback('/(.*?)(?:"|«)(.*?)(?:"|»)/',
+    function ($m) { return preg_replace($from, $to, $m[0]).$m[1]; },
+    $q);
   $q = substr($q, 0, -2);
   return $q;
 }
