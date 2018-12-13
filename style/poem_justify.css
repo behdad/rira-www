@@ -4,7 +4,8 @@
 
 .v { /* verse container */
   text-align: justify;
-  text-align-last: justify; /* for IE */
+  text-align-last: justify;
+  text-justify: kashida; /* for IE */
   border: 0;
 }
 
